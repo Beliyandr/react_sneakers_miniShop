@@ -44,7 +44,7 @@ function Home({
               width={30}
               height={30}
               className="clear closeBtn"
-              src="/img/btn_remove.svg"
+              src="img/btn_remove.svg"
               alt="clear"
               onClick={() => setSearchValue("")}
             ></img>

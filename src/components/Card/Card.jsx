@@ -57,7 +57,7 @@ function Card({
                 width={20}
                 height={20}
                 src={
-                  isFavorise ? "/img/heart_liked.svg" : "/img/heart_unliked.svg"
+                  isFavorise ? "img/heart_liked.svg" : "img/heart_unliked.svg"
                 }
                 alt="liked"
                 onClick={onClickFavorite}
@@ -77,8 +77,8 @@ function Card({
                   className={styles.plus}
                   src={
                     isItemAdded(id)
-                      ? "/img/button_checked.svg"
-                      : "/img/button_unchecked.svg"
+                      ? "img/button_checked.svg"
+                      : "img/button_unchecked.svg"
                   }
                   alt="Кнопка добавить"
                 />
