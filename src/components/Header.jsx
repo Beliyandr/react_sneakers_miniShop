@@ -1,23 +1,43 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import AppContext from "../context/context";
+import { useCart } from "../hooks/useCart";
+
 export const Header = (props) => {
+  const { totalPrice } = useCart();
+
+  // const { cartItems } = useContext(AppContext);
+
+  // const totalPrice = cartItems.reduce(
+  //   (sum, item) => sum + Number(item.price),
+  //   0
+  // );
+
   return (
     <header className="d-flex justify-between align-center">
-      <div className="headerLeft d-flex align-center">
-        <img src="/img/logo.svg" alt="Логотип" />
-        <div className="headerInfo">
-          <h3> React sneakers</h3>
-          <p>Магазин лучших кросовок</p>
+      <Link to="/">
+        <div className="headerLeft d-flex align-center">
+          <img src="/img/logo.svg" alt="Логотип" />
+          <div className="headerInfo">
+            <h3> React sneakers</h3>
+            <p>Магазин лучших кросовок</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <ul className="headerRigth d-flex">
         <li className="cu-p" onClick={props.onClickCart}>
           <img src="/img/cart.svg" alt="Корзина" />
-          <span className="ml-10"> 1205 грн</span>
+          <span className="ml-10"> {totalPrice} грн</span>
         </li>
         <li>
-          <img src="/img/heart.svg" alt="Like" />
+          <Link to="/favorites">
+            <img src="/img/heart.svg" alt="Закладки" />
+          </Link>
         </li>
         <li>
-          <img src="/img/user.svg" alt="Пользователь" />
+          <Link to="/orders">
+            <img src="/img/user.svg" alt="Пользователь" />
+          </Link>
         </li>
       </ul>
     </header>

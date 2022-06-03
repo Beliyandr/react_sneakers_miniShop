@@ -116,6 +116,10 @@ header {
     justify-content: space-between;
     display: flex;
     max-width: 300px;
+
+    img {
+      cursor: pointer;
+    }
   }
 }
 
@@ -157,6 +161,13 @@ header {
         background-image: url(../public/img/search.svg);
         background-repeat: no-repeat;
         cursor: pointer;
+      }
+      .clear {
+        position: absolute;
+        right: 10px;
+        top: 11px;
+        cursor: pointer;
+        flex: 0 0 auto;
       }
     }
   }
@@ -212,6 +223,31 @@ header {
       transition: opacity 0.15s ease-in-out;
       &:hover {
         opacity: 1;
+      }
+    }
+  }
+
+  .emptys {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+    &__block {
+      flex: 1 0 100%;
+    }
+    img {
+      margin-bottom: 50px;
+    }
+    .greenButton {
+      position: relative;
+      flex: 1 0 auto;
+      img {
+        position: absolute;
+        transform: rotate(180deg);
+        left: 30px;
+        top: 20px;
+        transition: transform 0.2s ease-in-out;
       }
     }
   }
