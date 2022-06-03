@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react_sneakers_miniShop/static/css/main.c2cb5d5c.css",
+    "main.js": "/react_sneakers_miniShop/static/js/main.eaa7390e.js",
+    "index.html": "/react_sneakers_miniShop/index.html",
+    "static/media/search.svg": "/react_sneakers_miniShop/static/media/search.48c52bf5d459537e27c0.svg",
+    "main.c2cb5d5c.css.map": "/react_sneakers_miniShop/static/css/main.c2cb5d5c.css.map",
+    "main.eaa7390e.js.map": "/react_sneakers_miniShop/static/js/main.eaa7390e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c2cb5d5c.css",
+    "static/js/main.eaa7390e.js"
+  ]
+}
