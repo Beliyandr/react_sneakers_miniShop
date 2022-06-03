@@ -1,9 +1,11 @@
 import { useState } from "react";
-import Info from "./Info";
 import axios from "axios";
-import { useCart } from "../hooks/useCart";
 
-function Drawer({ onRemove, onClose, items = [] }) {
+import Info from "../Info";
+import { useCart } from "../../hooks/useCart";
+import styles from "./Drawer.module.scss";
+
+function Drawer({ onRemove, onClose, items = [], opened }) {
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,15 +48,15 @@ function Drawer({ onRemove, onClose, items = [] }) {
   };
 
   return (
-    <div className="overlay">
-      <div className="drawer">
-        <div className="drawerTitle">
+    <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ""}`}>
+      <div className={styles.drawer}>
+        <div className={styles.drawerTitle}>
           <h2> Корзина</h2>
           <img
             onClick={onClose}
             width={30}
             height={30}
-            className="closeBtn"
+            className={styles.closeBtn}
             src="/img/btn_remove.svg"
             alt="remove"
           ></img>
@@ -62,13 +64,10 @@ function Drawer({ onRemove, onClose, items = [] }) {
 
         {items.length > 0 ? (
           <>
-            <div className="cartItems">
+            <div className={styles.cartItems}>
               {items.map((obj) => {
                 return (
-                  <div
-                    key={obj.id}
-                    className="cartItem d-flex align-center justify-between"
-                  >
+                  <div key={obj.id} className={styles.cartItem}>
                     <img
                       width={70}
                       height={70}
@@ -76,12 +75,12 @@ function Drawer({ onRemove, onClose, items = [] }) {
                       alt="Кросовки"
                       className="mr-20"
                     />
-                    <div className="cartName mr-10">
+                    <div className={styles.cartName}>
                       <p className="mb-5 ">{obj.name}</p>
                       <b>{obj.price} грн </b>
                     </div>
                     <img
-                      className="removeBtn"
+                      className={styles.removeBtn}
                       src="/img/btn_remove.svg"
                       alt="remove"
                       onClick={() => onRemove(obj.id)}
@@ -90,7 +89,7 @@ function Drawer({ onRemove, onClose, items = [] }) {
                 );
               })}
             </div>
-            <div className="cartTotalBlock">
+            <div className={styles.cartTotalBlock}>
               <ul>
                 <li>
                   <span>Итого:</span>
@@ -106,7 +105,7 @@ function Drawer({ onRemove, onClose, items = [] }) {
               <button
                 disabled={isLoading}
                 onClick={onClickOrder}
-                className="greenButton"
+                className={styles.greenButton}
               >
                 Оформить заказ <img src="/img/arrow.svg" alt="Arrow" />
               </button>

@@ -1,10 +1,9 @@
-import styles from "./Card.module.scss";
+import React, { useContext, useState } from "react";
 
 import ContentLoader from "react-content-loader";
 
-import React, { useContext, useState } from "react";
-
 import AppContext from "../../context/context";
+import styles from "./Card.module.scss";
 
 function Card({
   id,
@@ -20,15 +19,16 @@ function Card({
 
   // const [isAdded, setIsAdded] = useState(added);
   const [isFavorise, setisFavorite] = useState(favorited);
+  const obj = { id, parentId: id, name, price, img };
 
   const onClickPlus = () => {
-    console.log({ id, name, price, img });
-    onPlus({ id, name, price, img });
+    console.log(obj);
+    onPlus(obj);
     // setIsAdded(!isAdded);
   };
 
   const onClickFavorite = () => {
-    onFavorite({ id, name, price, img });
+    onFavorite(obj);
     setisFavorite(!isFavorise);
   };
 
@@ -51,17 +51,19 @@ function Card({
         </ContentLoader>
       ) : (
         <>
-          <div className={styles.favorite}>
-            <img
-              width={20}
-              height={20}
-              src={
-                isFavorise ? "/img/heart_liked.svg" : "/img/heart_unliked.svg"
-              }
-              alt="liked"
-              onClick={onClickFavorite}
-            />
-          </div>
+          {onFavorite && (
+            <div className={styles.favorite}>
+              <img
+                width={20}
+                height={20}
+                src={
+                  isFavorise ? "/img/heart_liked.svg" : "/img/heart_unliked.svg"
+                }
+                alt="liked"
+                onClick={onClickFavorite}
+              />
+            </div>
+          )}
           <img src={img} alt="Кроссовки" />
           <h5>{name}</h5>
           <div className="d-flex justify-between align-center">
@@ -69,8 +71,8 @@ function Card({
               <span>Цена:</span>
               <b> {price} грн</b>
             </div>
-            <button className={styles.button} onClick={onClickPlus}>
-              {onPlus && (
+            {onPlus && (
+              <button className={styles.button} onClick={onClickPlus}>
                 <img
                   className={styles.plus}
                   src={
@@ -80,8 +82,8 @@ function Card({
                   }
                   alt="Кнопка добавить"
                 />
-              )}
-            </button>
+              </button>
+            )}
           </div>
         </>
       )}

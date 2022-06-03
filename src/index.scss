@@ -176,110 +176,25 @@ header {
 .sneakers {
   column-gap: 40px;
 }
-
-.overlay {
-  // display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-
-.drawer {
-  position: absolute;
-  width: 385px;
-  right: 0;
-  height: 100%;
-  background: #ffffff;
-  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
-
-  padding: 30px;
-
+.emptys {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
 
-  .cartItems {
-    overflow: auto;
+  &__block {
+    flex: 1 0 100%;
   }
-  .drawerTitle {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 15px;
-    margin-bottom: 15px;
-
-    h2 {
-      flex: 0 1 auto;
-      margin-bottom: 20px;
-      font-size: 24px;
-      font-weight: 600;
-      text-decoration: underline;
-    }
-    .closeBtn {
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.15s ease-in-out;
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-
-  .emptys {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-
-    &__block {
-      flex: 1 0 100%;
-    }
-    img {
-      margin-bottom: 50px;
-    }
-    .greenButton {
-      position: relative;
-      flex: 1 0 auto;
-      img {
-        position: absolute;
-        transform: rotate(180deg);
-        left: 30px;
-        top: 20px;
-        transition: transform 0.2s ease-in-out;
-      }
-    }
-  }
-}
-
-.cartTotalBlock {
-  flex: 1 0 auto;
-  margin-top: 30px;
-  div {
-    flex: 1 1 auto;
-    border-bottom: 1px dashed #dfdfdf;
-    position: relative;
-    top: -4px;
-    margin: 0 7px;
-  }
-
-  li {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 20px;
+  img {
+    margin-bottom: 50px;
   }
   .greenButton {
     position: relative;
-
-    &:hover {
-      img {
-        transform: translateX(7px);
-      }
-    }
+    flex: 1 0 auto;
     img {
       position: absolute;
-      right: 30px;
+      transform: rotate(180deg);
+      left: 30px;
       top: 20px;
       transition: transform 0.2s ease-in-out;
     }
@@ -314,32 +229,5 @@ header {
   }
   &:active {
     background-color: darken(#65a01c, 30%);
-  }
-}
-
-.cartItems {
-  flex: 1 1 100%;
-}
-.cartItem {
-  border: 1px solid #f3f3f3;
-  border-radius: 20px;
-  overflow: hidden;
-  padding: 10px;
-  &:not(:last-child) {
-    margin-bottom: 10px;
-  }
-  p {
-    font-size: 16px;
-  }
-  b {
-    font-size: 14px;
-  }
-  .removeBtn {
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.15s ease-in-out;
-    &:hover {
-      opacity: 1;
-    }
   }
 }

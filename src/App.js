@@ -35,42 +35,79 @@ function App() {
     //     setItems(data);
     //   });
 
+    try {
+    } catch (error) {}
+
     async function fetchData() {
-      setIsLoading(true);
-      const cartResponse = await axios.get(mockapiUrl + "cart");
-      const favoritesResponse = await axios.get(mockapiUrl + "favorites");
-      const itemsResponse = await axios.get(mockapiUrl + "items");
+      try {
+        setIsLoading(true);
 
-      setIsLoading(false);
+        const [cartResponse, favoritesResponse, itemsResponse] =
+          await Promise.all([
+            axios.get(mockapiUrl + "cart"),
+            axios.get(mockapiUrl + "favorites"),
+            axios.get(mockapiUrl + "items"),
+          ]);
 
-      setCartItems(cartResponse.data);
-      setFavorites(favoritesResponse.data);
-      setItems(itemsResponse.data);
+        // const cartResponse = await axios.get(mockapiUrl + "cart");
+        // const favoritesResponse = await axios.get(mockapiUrl + "favorites");
+        // const itemsResponse = await axios.get(mockapiUrl + "items");
+
+        setIsLoading(false);
+
+        setCartItems(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
+      } catch (error) {
+        alert("Ошибки при первой загрузке данных");
+        console.log("Ошибки при первой загрузке данных", error);
+      }
     }
     fetchData();
   }, []);
 
-  const onAddToCart = (obj) => {
+  const onAddToCart = async (obj) => {
     try {
-      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-        axios.delete(`${mockapiUrl}cart/${obj.id}`);
+      const findItem = cartItems.find(
+        (item) => Number(item.parentId) === Number(obj.id)
+      );
+      if (findItem) {
         setCartItems((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id))
+          prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
+        await axios.delete(`${mockapiUrl}cart/${findItem.id}`);
       } else {
-        axios.post(mockapiUrl + "cart", obj);
         setCartItems((prev) => [...prev, obj]);
+        const { data } = await axios.post(mockapiUrl + "cart", obj);
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            } else {
+              return item;
+            }
+          })
+        );
       }
     } catch (error) {
-      console.log(error);
+      alert("Ошибка при добавлении в корзину");
+      console.log("Ошибка при добавлении в корзину", error);
     }
   };
 
-  const onRemoveItem = (id) => {
-    axios.delete(`${mockapiUrl}cart/${id}`);
-    setCartItems((prev) =>
-      prev.filter((item) => Number(item.id) !== Number(id))
-    );
+  const onRemoveItem = async (id) => {
+    try {
+      setCartItems((prev) => {
+        return prev.filter((item) => Number(item.id) !== Number(id));
+      });
+      await axios.delete(`${mockapiUrl}cart/${id}`);
+    } catch (error) {
+      console.log("Ошибка удаления из корзины", error);
+      alert("Ошибка удаления из корзины");
+    }
   };
 
   const onChangeSearchInput = (event) => {
@@ -80,7 +117,7 @@ function App() {
   const onAddToFavorite = async (obj) => {
     try {
       if (favorites.find((item) => item.id === obj.id)) {
-        axios.delete(`${mockapiUrl}favorites/${obj.id}`);
+        await axios.delete(`${mockapiUrl}favorites/${obj.id}`);
         // setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
       } else {
         const { data } = await axios.post(mockapiUrl + "favorites", obj);
@@ -88,11 +125,12 @@ function App() {
       }
     } catch (error) {
       alert("Не удалось добавить в фавориты");
+      console.log("Не удалось добавить в фавориты", error);
     }
   };
 
   const isItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (
@@ -109,13 +147,13 @@ function App() {
       }}
     >
       <div className="wrapper clear">
-        {cartOpened && (
-          <Drawer
-            onClose={() => setCartOpened(false)}
-            items={cartItems}
-            onRemove={onRemoveItem}
-          />
-        )}
+        <Drawer
+          onClose={() => setCartOpened(false)}
+          items={cartItems}
+          onRemove={onRemoveItem}
+          opened={cartOpened}
+        />
+
         <Header onClickCart={() => setCartOpened(true)} />
 
         <Route path="/" exact>
