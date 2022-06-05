@@ -1,0 +1,50 @@
+.empty {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.smile {
+  max-width: 100px;
+  margin-bottom: 15px;
+  img {
+    width: 100%;
+  }
+}
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 11px;
+}
+.text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+  opacity: 0.4;
+  margin-bottom: 40px;
+  max-width: 250px;
+}
+.empty_button {
+  max-width: 250px;
+  position: relative;
+  transition: all 0.5s ease-in;
+  img {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transform: rotate(180deg);
+    transition: all 0.2s ease-in;
+  }
+  &:hover img {
+    transition: all 0.2s ease-in;
+    left: 10px;
+  }
+}

@@ -57,7 +57,7 @@ function Drawer({ onRemove, onClose, items = [], opened }) {
             width={30}
             height={30}
             className={styles.closeBtn}
-            src="/img/btn_remove.svg"
+            src="img/btn_remove.svg"
             alt="remove"
           ></img>
         </div>

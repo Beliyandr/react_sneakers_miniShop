@@ -7,7 +7,7 @@ export const Header = (props) => {
 
   return (
     <header className="d-flex justify-between align-center">
-      <Link to="/">
+      <Link to="">
         <div className="headerLeft d-flex align-center">
           <img src="img/logo.svg" alt="Логотип" />
           <div className="headerInfo">
@@ -22,12 +22,12 @@ export const Header = (props) => {
           <span className="ml-10"> {totalPrice} грн</span>
         </li>
         <li>
-          <Link to="/favorites">
+          <Link to="favorites">
             <img src="img/heart.svg" alt="Закладки" />
           </Link>
         </li>
         <li>
-          <Link to="/orders">
+          <Link to="orders">
             <img src="img/user.svg" alt="Пользователь" />
           </Link>
         </li>

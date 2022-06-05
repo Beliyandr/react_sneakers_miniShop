@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Card from "../components/Card";
+import { Empty } from "../components/Empty/Empty";
 
 export const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -34,6 +35,16 @@ export const Orders = () => {
         {(isLoading ? [...Array(8)] : orders).map((item, index) => (
           <Card key={isLoading ? index : index} loading={isLoading} {...item} />
         ))}
+
+        {orders ? (
+          <Empty
+            title="У вас нет заказов"
+            text="Вы нищеброд? Оформите хотя бы один заказ."
+            img="smile_1.jpg"
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

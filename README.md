@@ -1,6 +1,6 @@
 # Getting Started with Create React App
-https://beliyandr.github.io/react_sneakers_miniShop/
 
+https://beliyandr.github.io/react_sneakers_miniShop/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

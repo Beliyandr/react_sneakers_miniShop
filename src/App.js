@@ -1,5 +1,3 @@
-// import bd from "./bd";
-
 import Drawer from "./components/Drawer";
 import { Header } from "./components/Header";
 
@@ -27,14 +25,6 @@ function App() {
   const mockapiUrl = "https://62910cbf27f4ba1c65c71f44.mockapi.io/";
 
   useEffect(() => {
-    // fetch("https://62910cbf27f4ba1c65c71f44.mockapi.io/items")
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     setItems(data);
-    //   });
-
     try {
     } catch (error) {}
 
@@ -48,10 +38,6 @@ function App() {
             axios.get(mockapiUrl + "favorites"),
             axios.get(mockapiUrl + "items"),
           ]);
-
-        // const cartResponse = await axios.get(mockapiUrl + "cart");
-        // const favoritesResponse = await axios.get(mockapiUrl + "favorites");
-        // const itemsResponse = await axios.get(mockapiUrl + "items");
 
         setIsLoading(false);
 
@@ -156,7 +142,7 @@ function App() {
 
         <Header onClickCart={() => setCartOpened(true)} />
 
-        <Route path="/" exact>
+        <Route exact path="/">
           <Home
             cartItems={cartItems}
             items={items}
@@ -167,10 +153,10 @@ function App() {
             isLoading={isLoading}
           />
         </Route>
-        <Route path="/favorites" exact>
+        <Route exact path="/favorites">
           <Favorites onAddToFavorite={onAddToFavorite} />
         </Route>
-        <Route path="/orders" exact>
+        <Route exact path="/orders">
           <Orders />
         </Route>
       </div>
