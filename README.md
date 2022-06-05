@@ -4,7 +4,7 @@ https://beliyandr.github.io/react_sneakers_miniShop/
 
 ============================================
 
-<p><b>Stack:</b></p>
+<h1><b>Stack:</b></h1>
 
 <li> ReactJS + хуки </li>
 <li> React Router </li>

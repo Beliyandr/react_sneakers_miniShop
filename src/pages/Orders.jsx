@@ -36,7 +36,7 @@ export const Orders = () => {
           <Card key={isLoading ? index : index} loading={isLoading} {...item} />
         ))}
 
-        {orders ? (
+        {orders.length < 1 ? (
           <Empty
             title="У вас нет заказов"
             text="Вы нищеброд? Оформите хотя бы один заказ."
